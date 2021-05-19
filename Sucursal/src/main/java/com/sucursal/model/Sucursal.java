@@ -1,12 +1,16 @@
 package com.sucursal.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.data.geo.Point;
+
 @Entity
-public class Sucursal {
+public class Sucursal implements Serializable{
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +20,7 @@ public class Sucursal {
 	
 	private String direccion;
 	
-	private double lat,lng;
+	private double lat,lng;   
 	
 	public long getId() {
 		return id;
@@ -48,7 +52,5 @@ public class Sucursal {
 	public void setLng(double lng) {
 		this.lng = lng;
 	}
-	
-	
 	
 }

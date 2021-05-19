@@ -13,12 +13,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.sucursal.exception.RecurnoNoEncontradoException;
 import com.sucursal.model.ErrorMsj;
 
 @ControllerAdvice
 public class ErrorHandler {
 
 	private Logger logger = LoggerFactory.getLogger(ErrorHandler.class);
+	
+	/* Manejadores para los errores 4XX */
+	
+	/**
+	 * Manejador para 404
+	 * 
+	 * @return HTTP 404
+	 */
+	@ExceptionHandler({ RecurnoNoEncontradoException.class })
+	public ResponseEntity<ErrorMsj> handleRecursoNoencontrado(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+		
+		logger.error(HttpStatus.NOT_FOUND.value()+ " - "+ HttpStatus.NOT_FOUND.getReasonPhrase(), ex.getStackTrace());
+		
+		ErrorMsj mensaje = new ErrorMsj(HttpStatus.NOT_FOUND.value(), "Recurso no encontrado");
+		
+		return new ResponseEntity<ErrorMsj>(mensaje, HttpStatus.NOT_FOUND);
+	}
 	
 	
 	/* Manejadores para los errores 5XX */

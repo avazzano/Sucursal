@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sucursal.exception.RecurnoNoEncontradoException;
 import com.sucursal.model.Sucursal;
 import com.sucursal.service.SucursalService;
 
@@ -30,17 +31,26 @@ public class SucursalResource {
 	
 	@GetMapping("{id}")
 	@ApiOperation(value = "Obtener Scursal por id")
-	public ResponseEntity<Sucursal> getSucursal(@PathVariable long id) {
+	public ResponseEntity<Sucursal> getSucursal(@PathVariable long id) throws RecurnoNoEncontradoException {
 		 
 		Sucursal sucursal = sucursalService.get(id);
 		
 		return ResponseEntity.ok(sucursal);
 	}
 	
+	@GetMapping()
+	@ApiOperation(value = "Listar Scursales")
+	public ResponseEntity<List<Sucursal>> getSucursal() {
+		 
+		List<Sucursal> sucursal = sucursalService.get();
+		
+		return ResponseEntity.ok(sucursal);
+	}
 	
-	@GetMapping("")
+	
+	@GetMapping("{lat}/{lng}")
 	@ApiOperation(value = "Sucursal mas cercana")
-	public ResponseEntity<Sucursal> getSucursal(double lat, double lng){
+	public ResponseEntity<Sucursal> getSucursal(@PathVariable double lat, @PathVariable double lng) throws RecurnoNoEncontradoException{
 
 		Sucursal sucursal=sucursalService.get(lat, lng);
 		
