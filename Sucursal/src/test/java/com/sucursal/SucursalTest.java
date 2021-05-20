@@ -3,12 +3,18 @@ package com.sucursal;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.sucursal.exception.RecurnoNoEncontradoException;
 import com.sucursal.model.Sucursal;
 import com.sucursal.service.SucursalService;
 
+
+//@ContextConfiguration(classes = { SucursalApplicationTests.class })
+
+@SpringBootTest
 public class SucursalTest {
 
 	
@@ -40,9 +46,9 @@ public class SucursalTest {
 		sucursalService.create(suc3);
 		
 		
-		Sucursal sucursalcercana = sucursalService.get(-36.16, -32.0001);
+		Sucursal sucursalcercana = sucursalService.get(-36.16, -28);
 		
-		assertEquals(sucursalcercana, suc2);
+		assertEquals(sucursalcercana.getId(), suc2.getId());
 		
 	
 	}

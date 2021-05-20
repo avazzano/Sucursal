@@ -25,12 +25,12 @@ public class DistanciaComparator implements Comparator<Sucursal> {
         //Calcula distancia Origen -> Sucusal1
         double lat1 = Math.toRadians(suc1.getLat());
         double lon1 = Math.toRadians(suc1.getLng());
-        Double distanciaA = earthRadius * Math.acos(Math.sin(lat)*Math.sin(lat1) + Math.cos(lat)*Math.cos(lat1)*Math.cos(lng - lon1));
+        Double distanciaA = earthRadius * Math.acos(Math.sin(latDesde)*Math.sin(lat1) + Math.cos(latDesde)*Math.cos(lat1)*Math.cos(lngDesde - lon1));
         
         //Calculo distancia Origen -> Sucusal2    	        
         double lat2 = Math.toRadians(suc2.getLat());
         double lon2 = Math.toRadians(suc2.getLng());
-        Double distanciaB = earthRadius * Math.acos(Math.sin(lat)*Math.sin(lat2) + Math.cos(lat)*Math.cos(lat2)*Math.cos(lng - lon2));
+        Double distanciaB = earthRadius * Math.acos(Math.sin(latDesde)*Math.sin(lat2) + Math.cos(latDesde)*Math.cos(lat2)*Math.cos(lngDesde - lon2));
         
     	
     	return  distanciaA.compareTo(distanciaB);
