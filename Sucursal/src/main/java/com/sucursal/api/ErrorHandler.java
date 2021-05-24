@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.sucursal.exception.RecurnoNoEncontradoException;
+import com.sucursal.exception.RecursoNoEncontradoException;
 import com.sucursal.model.ErrorMsj;
 
 @ControllerAdvice
@@ -28,7 +28,7 @@ public class ErrorHandler {
 	 * 
 	 * @return HTTP 404
 	 */
-	@ExceptionHandler({ RecurnoNoEncontradoException.class })
+	@ExceptionHandler({ RecursoNoEncontradoException.class })
 	public ResponseEntity<ErrorMsj> handleRecursoNoencontrado(Exception ex, HttpServletRequest request, HttpServletResponse response) {
 		
 		logger.error(HttpStatus.NOT_FOUND.value()+ " - "+ HttpStatus.NOT_FOUND.getReasonPhrase(), ex.getStackTrace());

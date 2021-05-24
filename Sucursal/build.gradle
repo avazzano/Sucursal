@@ -8,6 +8,12 @@ group = 'com.sucursal'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
+jar {
+    archiveBaseName = 'sucursal'
+    archiveVersion =  '0.1.0'
+}
+
+
 repositories {
 	mavenCentral()
 }
@@ -27,6 +33,11 @@ dependencies {
 	}
 	compile "io.springfox:springfox-swagger-ui:${swaggerVersion}"
     compile "io.springfox:springfox-swagger2:${swaggerVersion}"
+    
+     
+     implementation group: 'com.google.maps', name: 'google-maps-services', version: '0.18.1'
+     
+    
 }
 
 test {
