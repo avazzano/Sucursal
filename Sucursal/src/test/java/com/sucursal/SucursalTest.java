@@ -47,7 +47,7 @@ public class SucursalTest {
 		
 		
 		//Coordenadas de CABA -34.6022703,-58.3915682
-		Sucursal sucursalcercana = sucursalService.get(-34.6022703, -58.3915682);
+		Sucursal sucursalcercana = sucursalService.get(-37.6022703, -57.3915682);
 		
 		assertEquals(sucursalcercana.getId(), suc1.getId());
 		

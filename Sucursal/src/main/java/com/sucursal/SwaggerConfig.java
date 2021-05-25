@@ -23,23 +23,20 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-	// @Value("${info.build.version}")
 	private String version = "0.1";
 
-	private String env = "Desarrollo"; // AppProperties.getAmbiente();
+	private String env = "Desarrollo"; 
 
 	@Bean
 	public Docket postsApi() {
 
-		// Adding Header
 		ParameterBuilder aParameterBuilder = new ParameterBuilder();
-		aParameterBuilder.name("Authorization") // name of header
-				.modelRef(new ModelRef("string")).parameterType("header") // type - header
-				.required(false) // for compulsory
+		aParameterBuilder.modelRef(new ModelRef("string")).parameterType("header")
+				.required(false) 
 				.build();
 		
 		List<springfox.documentation.service.Parameter> aParameters = new ArrayList<>();
-		aParameters.add(aParameterBuilder.build()); // add parameter
+		aParameters.add(aParameterBuilder.build()); 
 
 		return new Docket(DocumentationType.SWAGGER_2).groupName("public-api").
 					apiInfo(apiInfo())
@@ -49,21 +46,11 @@ public class SwaggerConfig {
 				    .globalOperationParameters(aParameters);
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	private Predicate<String> postPaths() {
 		return or(regex("/api/sucursal.*"));
 	}
 	
 	
-
-
-	/**
-	 * 
-	 * @return
-	 */
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title("Sucursal API (" + env + ")").description("v " + version)
 				.termsOfServiceUrl("http://")
