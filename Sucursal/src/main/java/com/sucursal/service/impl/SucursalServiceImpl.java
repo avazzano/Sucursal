@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -35,12 +36,12 @@ public class SucursalServiceImpl implements SucursalService {
 
 	@Override
 	public Sucursal get(long id) throws RecursoNoEncontradoException {
-		Sucursal sucursal = sucursalRepository.getOne(id);
+		Optional<Sucursal> sucursal = sucursalRepository.findById(id);
 
-		if (sucursal == null)
+		if (sucursal.isEmpty())
 			throw new RecursoNoEncontradoException("No se encontro sucrusal");
 
-		return sucursal;
+		return sucursal.get();
 	}
 
 	@Override
