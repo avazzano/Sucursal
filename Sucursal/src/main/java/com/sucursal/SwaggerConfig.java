@@ -1,19 +1,11 @@
 package com.sucursal;
 
-import static com.google.common.base.Predicates.or;
-import static springfox.documentation.builders.PathSelectors.regex;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.google.common.base.Predicate;
-
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.ParameterBuilder;
-import springfox.documentation.schema.ModelRef;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -29,34 +21,18 @@ public class SwaggerConfig {
 
 	@Bean
 	public Docket postsApi() {
-
-		ParameterBuilder aParameterBuilder = new ParameterBuilder();
-		aParameterBuilder.modelRef(new ModelRef("string")).parameterType("header")
-				.required(false) 
-				.build();
-		
-		List<springfox.documentation.service.Parameter> aParameters = new ArrayList<>();
-		aParameters.add(aParameterBuilder.build()); 
-
-		return new Docket(DocumentationType.SWAGGER_2).groupName("public-api").
-					apiInfo(apiInfo())
-					.select()
-					.paths(postPaths()).
-					build()
-				    .globalOperationParameters(aParameters);
+		 return new Docket(DocumentationType.SWAGGER_2)  
+		          .select()                                  
+		          .apis(RequestHandlerSelectors.any())              
+		          .paths(PathSelectors.any())                          
+		          .build();    
 	}
 
-	private Predicate<String> postPaths() {
-		return or(regex("/api/sucursal.*"));
-	}
-	
-	
+
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title("Sucursal API (" + env + ")").description("v " + version)
 				.termsOfServiceUrl("http://")
 				.version(version).build();
 	}
-
-	
 
 }
